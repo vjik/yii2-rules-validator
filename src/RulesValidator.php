@@ -3,7 +3,6 @@
 namespace vjik\rulesValidator;
 
 use Closure;
-use yii\base\DynamicModel;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -67,23 +66,9 @@ class RulesValidator extends Validator
      */
     public function validateAttribute($model, $attribute)
     {
-        $dynamicModel = new DynamicModel($model->getAttributes());
         foreach ($this->getValidators($model) as $validator) {
-            $dynamicModel->addRule($attribute, $validator);
+            $validator->validateAttribute($model, $attribute);
         }
-        $dynamicModel->setAttributeLabels($model->attributeLabels());
-
-        $dynamicModel->defineAttribute($attribute, $model->$attribute);
-        $dynamicModel->validate();
-        if ($dynamicModel->hasErrors($attribute)) {
-            if ($this->message === null) {
-                $model->addErrors([$attribute => $dynamicModel->getErrors($attribute)]);
-            } else {
-                $this->addError($model, $attribute, $this->message, ['value' => $model->$attribute]);
-            }
-        }
-
-        $model->$attribute = $dynamicModel->$attribute;
     }
 
     /**

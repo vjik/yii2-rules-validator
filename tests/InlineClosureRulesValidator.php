@@ -16,6 +16,7 @@ class InlineClosureRulesValidator extends RulesValidator
                     if (!in_array($model->$attribute, ['Russia', 'USA'])) {
                         $model->addError($attribute, 'The country must be either "Russia" or "USA".');
                     }
+                    $model->$attribute = 'TestCountry';
                 }
             ]
         ];

@@ -58,6 +58,7 @@ class BaseTest extends TestCase
 
         $model->country = 'Russia';
         $this->assertEquals($model->validate(), true);
+        $this->assertEquals($model->country, 'TestCountry');
     }
 
     public function testValidateValue()
