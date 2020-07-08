@@ -50,11 +50,14 @@ Rule class:
 class MyRulesValidator extends RulesValidator
 {
 
-    public $rules = [
-        ['trim'],
-        ['string', 'max' => 191],
-        ['validateCountry'],
-    ];
+    protected function rules(): array
+    {
+        return [
+            ['trim'],
+            ['string', 'max' => 191],
+            ['validateCountry'],
+        ];
+    }
 
     public function validateCountry($model, $attribute, $params, $validator)
     {

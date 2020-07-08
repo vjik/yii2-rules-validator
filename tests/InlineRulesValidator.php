@@ -7,10 +7,13 @@ use vjik\rulesValidator\RulesValidator;
 class InlineRulesValidator extends RulesValidator
 {
 
-    public $rules = [
-        ['trim'],
-        ['validateCountry', 'params' => ['y' => 12]]
-    ];
+    protected function rules(): array
+    {
+        return [
+            ['trim'],
+            ['validateCountry', 'params' => ['y' => 12]]
+        ];
+    }
 
     public function validateCountry($model, $attribute, $params, $validator)
     {

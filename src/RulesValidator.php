@@ -13,11 +13,6 @@ class RulesValidator extends Validator
 {
 
     /**
-     * @var array
-     */
-    public $rules = [];
-
-    /**
      * @inheritDoc
      */
     public function __construct($config = [])
@@ -28,6 +23,32 @@ class RulesValidator extends Validator
             }
         }
         parent::__construct($config);
+    }
+
+    protected $_rules = [];
+
+    /**
+     * @param array $rules
+     */
+    public function setRules(array $rules)
+    {
+        $this->_rules = $rules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRules(): array
+    {
+        return $this->_rules;
+    }
+
+    /**
+     * @return array
+     */
+    protected function rules(): array
+    {
+        return $this->getRules();
     }
 
     /**
@@ -86,7 +107,7 @@ class RulesValidator extends Validator
     {
         if ($this->_validators === null) {
             $this->_validators = [];
-            foreach ($this->rules as $rule) {
+            foreach ($this->rules() as $rule) {
                 if ($rule instanceof Validator) {
                     $this->_validators[] = $rule;
                 } elseif (is_array($rule) && isset($rule[0])) { // validator type
