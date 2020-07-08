@@ -1,0 +1,37 @@
+{
+    "name": "vjik/yii2-rules-validator",
+    "description": "Yii2 validator with nested rules",
+    "version": "1.0.0",
+    "type": "library",
+    "keywords": [
+        "yii2",
+        "validation",
+        "rules"
+    ],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/vjik/yii2-rules-validator/issues",
+        "source": "https://github.com/vjik/yii2-rules-validator"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "vjik\\rulesValidator\\": "src",
+            "vjik\\rulesValidatorTests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "yiisoft/yii2-coding-standards": "2.*",
+        "phpunit/phpunit": "^7.5"
+    },
+    "require": {
+        "php": ">=7.1.0",
+        "yiisoft/yii2": "^2.0.34"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
