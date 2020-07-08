@@ -48,6 +48,18 @@ class BaseTest extends TestCase
         $this->assertEquals($model->validate(), true);
     }
 
+    public function testInlineClosureRulesModel()
+    {
+        $model = new InlineClosureModel();
+
+        $model->country = 'Australia';
+        $this->assertEquals($model->validate(), false);
+        $this->assertEquals($model->getFirstError('country'), 'The country must be either "Russia" or "USA".');
+
+        $model->country = 'Russia';
+        $this->assertEquals($model->validate(), true);
+    }
+
     public function testValidateValue()
     {
         $validator = new RulesValidator([

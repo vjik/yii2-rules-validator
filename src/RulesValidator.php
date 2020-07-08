@@ -2,6 +2,7 @@
 
 namespace vjik\rulesValidator;
 
+use Closure;
 use yii\base\DynamicModel;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
@@ -140,21 +141,20 @@ class RulesValidator extends Validator
     {
         $isModelRule = ArrayHelper::remove($params, '_isModelRule');
 
-        if (is_string($type) &&
-            !$isModelRule &&
-            !isset(static::$builtInValidators[$type]) &&
-            $this->hasMethod($type)
+        if (!$isModelRule &&
+            (
+                (is_string($type) && !isset(static::$builtInValidators[$type]) && $this->hasMethod($type)) ||
+                $type instanceof Closure
+            )
         ) {
             $params['class'] = InlineValidator::class;
             if (!isset($params['params']) || !is_array($params['params'])) {
                 $params['params'] = [];
             }
-            $params['params']['_ruleInstance'] = $this;
-            $params['params']['_ruleMethod'] = $type;
+            $params['params']['_ruleCallable'] = is_string($type) ? [$this, $type] : $type;
             $params['params']['_ruleModel'] = $model;
             $type = function ($attribute, $params, $validator) {
-                $callable = [ArrayHelper::remove($params, '_ruleInstance'), ArrayHelper::remove($params, '_ruleMethod')];
-                call_user_func($callable, ArrayHelper::remove($params, '_ruleModel'), $attribute, $params, $validator);
+                call_user_func(ArrayHelper::remove($params, '_ruleCallable'), ArrayHelper::remove($params, '_ruleModel'), $attribute, $params, $validator);
             };
         }
 
