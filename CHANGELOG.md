@@ -1,6 +1,7 @@
 ## 2.0.0 — 08.07.2020
 
-* Changed use of property `rules` to protected method `rules()`. 
+* Changed use of property `rules` to protected method `rules()`.
+* Default properties $skipOnEmpty and $enableClientValidation are set to false. 
 
 ## 1.0.0 — 08.07.2020
 

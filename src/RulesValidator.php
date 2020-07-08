@@ -15,6 +15,16 @@ class RulesValidator extends Validator
     /**
      * @inheritDoc
      */
+    public $skipOnEmpty = false;
+
+    /**
+     * @inheritDoc
+     */
+    public $enableClientValidation = false;
+
+    /**
+     * @inheritDoc
+     */
     public function __construct($config = [])
     {
         if (!empty($config) && isset($config['rules'])) {
