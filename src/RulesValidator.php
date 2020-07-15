@@ -67,8 +67,33 @@ class RulesValidator extends Validator
     public function validateAttribute($model, $attribute)
     {
         foreach ($this->getValidators($model) as $validator) {
-            $validator->validateAttribute($model, $attribute);
+            if (!$this->skipValidatator($validator, $model, $attribute)) {
+                $validator->validateAttribute($model, $attribute);
+            }
         }
+    }
+
+    /**
+     * @param Validator $validator
+     * @param Model $model
+     * @param string $attribute
+     * @return bool
+     */
+    protected function skipValidatator(Validator $validator, Model $model, string $attribute): bool
+    {
+        if ($validator->skipOnError && $model->hasErrors($attribute)) {
+            return true;
+        }
+        if ($validator->skipOnEmpty && $validator->isEmpty($model->$attribute)) {
+            return true;
+        }
+        if ($validator->when === null) {
+            return false;
+        }
+        if (is_bool($validator->when)) {
+            return !$validator->when;
+        }
+        return !call_user_func($validator->when, $model, $attribute);
     }
 
     /**
