@@ -23,4 +23,11 @@ class BaseModel extends Model
             ],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'attr' => 'Attr',
+        ];
+    }
 }

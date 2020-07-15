@@ -18,7 +18,6 @@ class InlineModel extends Model
                 RulesValidator::class,
                 'rules' => [
                     ['trim'],
-                    ['string', 'max' => 191],
                     ['validateCountry'],
                 ],
             ],

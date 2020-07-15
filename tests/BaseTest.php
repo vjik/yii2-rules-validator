@@ -32,7 +32,7 @@ class BaseTest extends TestCase
         $model->country = 'Australia';
         $this->assertEquals($model->validate(), false);
 
-        $model->country = 'Russia';
+        $model->country = ' Russia ';
         $this->assertEquals($model->validate(), true);
     }
 
@@ -44,7 +44,7 @@ class BaseTest extends TestCase
         $this->assertEquals($model->validate(), false);
         $this->assertEquals($model->getFirstError('country'), 'The country must be either "Russia" or "USA".');
 
-        $model->country = 'Russia';
+        $model->country = ' Russia ';
         $this->assertEquals($model->validate(), true);
     }
 
