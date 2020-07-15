@@ -1,6 +1,6 @@
 <?php
 
-namespace vjik\rulesValidatorTests;
+namespace vjik\rulesValidatorTests\base;
 
 use vjik\rulesValidator\RulesValidator;
 use yii\base\Model;

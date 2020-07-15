@@ -4,6 +4,10 @@ namespace vjik\rulesValidatorTests;
 
 use PHPUnit\Framework\TestCase;
 use vjik\rulesValidator\RulesValidator;
+use vjik\rulesValidatorTests\base\BaseModel;
+use vjik\rulesValidatorTests\base\InlineClosureModel;
+use vjik\rulesValidatorTests\base\InlineModel;
+use vjik\rulesValidatorTests\base\InlineRulesModel;
 
 class BaseTest extends TestCase
 {

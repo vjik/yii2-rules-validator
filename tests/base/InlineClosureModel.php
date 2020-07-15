@@ -1,7 +1,8 @@
 <?php
 
-namespace vjik\rulesValidatorTests;
+namespace vjik\rulesValidatorTests\base;
 
+use vjik\rulesValidatorTests\base\InlineClosureRulesValidator;
 use yii\base\Model;
 
 class InlineClosureModel extends Model
